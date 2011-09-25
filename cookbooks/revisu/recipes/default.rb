@@ -15,3 +15,8 @@ template "nginx.conf" do
   group "root"
   mode 0644
 end
+
+gem_package "passenger" do
+  action :install
+  ignore_failure false
+end

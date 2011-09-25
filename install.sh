@@ -14,5 +14,9 @@ echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 # Install chef
 gem install chef
 
+# Move the cookboooks to the right place for check.
+mkdir -p /var/chef-solo/cookbooks
+mv ./cookbooks/* /var/chef-solo/cookbooks/
+
 # Now install the requisite cookbooks!
 chef-solo -c ./solo.rb ./app_server.json
