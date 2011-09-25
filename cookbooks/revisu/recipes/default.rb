@@ -1,4 +1,4 @@
-%w{/www/revisu/current /www/revisu/release /www/revisu/shared} do |d|
+%w{/www/revisu/current /www/revisu/release /www/revisu/shared}.each do |d|
   directory d do
     mode 0755
     owner 'root'
