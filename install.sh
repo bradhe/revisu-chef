@@ -1,9 +1,9 @@
 apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev
-curl -o /opt/rubygems.tgz http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
+curl -o /opt/rubygems-1.8.10.tgz http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
 
 cd /opt
-tar -xvf rubygems.tgz
-ruby ./rubygems/setup.rb
+tar -xvf rubygems-1.8.10.tgz
+ruby ./rubygems-1.8.10/setup.rb
 cd -
 
 # Install chef
