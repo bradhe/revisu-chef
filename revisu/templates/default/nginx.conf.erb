@@ -1,0 +1,53 @@
+#user  nobody;
+worker_processes  4;  
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+pid        logs/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    passenger_root /usr/lib/ruby/gems/1.8/gems/passenger-3.0.7;
+    passenger_ruby /usr/bin/ruby1.8;
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        server_name www.revisu.com;
+        rewrite ^/(.*) http://app.revisu.com/$1 permanent;
+    }
+
+    server {
+        listen 80;
+        server_name app.revisu.com;
+        root /www/revisu/current/public/;
+        passenger_enabled on;
+
+        location / {
+            passenger_enabled on;
+            passenger_use_global_queue on;
+
+            rails_env production;
+        }
+    }
+}
