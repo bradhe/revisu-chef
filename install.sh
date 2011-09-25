@@ -6,6 +6,8 @@ tar -xvf rubygems-1.8.10.tgz
 ruby ./rubygems-1.8.10/setup.rb
 cd -
 
+ln -s /usr/bin/gem1.8 /usr/bin/gem
+
 # Install chef
 gem install chef
 
