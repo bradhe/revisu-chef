@@ -1,0 +1,5 @@
+production:
+  adapter: mysql
+  database: revisu
+  user: revisu_user
+  password: <%= node.set_unless['mysql']['server_root_password'] %>

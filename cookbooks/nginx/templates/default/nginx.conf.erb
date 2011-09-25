@@ -1,40 +1,53 @@
-user <%= node[:nginx][:user] %>;
-worker_processes  <%= node[:nginx][:worker_processes] %>;
-<% if node[:nginx][:daemon_disable] -%>
-daemon off;
-<% end -%>
+#user  nobody;
+worker_processes  4;  
 
-error_log  <%= node[:nginx][:log_dir] %>/error.log;
-pid        /var/run/nginx.pid;
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+pid        logs/nginx.pid;
 
 events {
-  worker_connections  <%= node[:nginx][:worker_connections] %>;
+    worker_connections  1024;
 }
 
 http {
-  include       <%= node[:nginx][:dir] %>/mime.types;
-  default_type  application/octet-stream;
+    passenger_root /usr/lib/ruby/gems/1.8/gems/passenger-3.0.7;
+    passenger_ruby /usr/bin/ruby1.8;
 
-  access_log	<%= node[:nginx][:log_dir] %>/access.log;
+    include       mime.types;
+    default_type  application/octet-stream;
 
-  sendfile on;
-  tcp_nopush on;
-  tcp_nodelay on;
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
 
-  <% if node[:nginx][:keepalive] == "on" %>
-  keepalive_timeout  <%= node[:nginx][:keepalive_timeout] %>;
-  <% end %>
+    #access_log  logs/access.log  main;
 
-  gzip  <%= node[:nginx][:gzip] %>;
-  <% if node[:nginx][:gzip] == "on" %>
-  gzip_http_version <%= node[:nginx][:gzip_http_version] %>;
-  gzip_comp_level <%= node[:nginx][:gzip_comp_level] %>;
-  gzip_proxied <%= node[:nginx][:gzip_proxied] %>;
-  gzip_types <%= node[:nginx][:gzip_types].join(' ') %>;
-  <% end %>
+    sendfile        on;
+    #tcp_nopush     on;
 
-  server_names_hash_bucket_size <%= node[:nginx][:server_names_hash_bucket_size] %>;
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
 
-  include <%= node[:nginx][:dir] %>/conf.d/*.conf;
-  include <%= node[:nginx][:dir] %>/sites-enabled/*;
+    #gzip  on;
+
+    server {
+        server_name www.revisu.com;
+        rewrite ^/(.*) http://app.revisu.com/$1 permanent;
+    }
+
+    server {
+        listen 80;
+        server_name app.revisu.com;
+        root /www/revisu/current/public/;
+        passenger_enabled on;
+
+        location / {
+            passenger_enabled on;
+            passenger_use_global_queue on;
+
+            rails_env production;
+        }
+    }
 }
