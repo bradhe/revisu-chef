@@ -16,6 +16,7 @@ echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 gem install chef mysql
 
 # Move the cookboooks to the right place for check.
+rm -rf /var/chef-solo
 mkdir -p /var/chef-solo/cookbooks
 mv ./cookbooks/* /var/chef-solo/cookbooks/
 
