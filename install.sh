@@ -8,6 +8,9 @@ cd -
 
 ln -s /usr/bin/gem1.8 /usr/bin/gem
 
+# Screw that ri shit
+echo "gem: --no-rdoc --no-ri" > ~/.gemrc
+
 # Install chef
 gem install chef
 
