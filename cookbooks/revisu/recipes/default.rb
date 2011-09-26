@@ -17,6 +17,11 @@ gem_package "passenger" do
   ignore_failure false
 end
 
+gem_package "bundle" do
+  action :install
+  ignore_failure false
+end
+
 template '/www/revisu/shared/database.yml' do
   source 'database.yml.erb'
   mode 0755
