@@ -1,0 +1,3 @@
+{
+  "run_list": ["recipe[git]", "recipe[nginx::source]", "recipe[revisu]"]
+}
