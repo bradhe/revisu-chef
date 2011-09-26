@@ -35,3 +35,10 @@ template '/www/revisu/shared/database.yml' do
   owner 'ubuntu'
   group 'ubuntu'
 end
+
+template '/opt/nginx/conf/nginx.conf' do
+  source 'nginx.conf.erb'
+  mode 0755
+  owner 'ubuntu'
+  group 'ubuntu'
+end
