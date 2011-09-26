@@ -1,5 +1,5 @@
 apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev
-apt-get install libmysqlclient-dev
+apt-get install libmysqlclient-dev libmagick9-dev
 curl -o /opt/rubygems-1.8.10.tgz http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
 
 cd /opt
@@ -13,7 +13,7 @@ ln -s /usr/bin/gem1.8 /usr/bin/gem
 echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 
 # Install chef
-gem install chef mysql libmagick9-dev
+gem install chef mysql
 
 # Move the cookboooks to the right place for check.
 rm -rf /var/chef-solo
