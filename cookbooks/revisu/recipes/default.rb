@@ -22,8 +22,8 @@ gem_package "bundle" do
   ignore_failure false
 end
 
-bash "install nginx-with-passenger" do
-  script <<-EOF
+script "install nginx-with-passenger" do
+  bash <<-EOF
     passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags=--with-http_ssl_module
   EOF
   not_if File.exists?("/opt/nginx")
