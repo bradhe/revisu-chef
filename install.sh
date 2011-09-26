@@ -20,4 +20,4 @@ mkdir -p /var/chef-solo/cookbooks
 mv ./cookbooks/* /var/chef-solo/cookbooks/
 
 # Now install the requisite cookbooks!
-chef-solo -c ./solo.rb -j ./app_server.json
+chef-solo -c ./solo.rb -j $1
