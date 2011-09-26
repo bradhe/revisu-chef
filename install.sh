@@ -1,5 +1,4 @@
-apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev
-apt-get install libmysqlclient-dev libmagick9-dev
+apt-get install ruby build-essential libopenssl-ruby ruby1.8-dev curl libcurl3 libcurl3-dev libmysqlclient-dev libmagick9-dev
 curl -o /opt/rubygems-1.8.10.tgz http://production.cf.rubygems.org/rubygems/rubygems-1.8.10.tgz
 
 cd /opt
