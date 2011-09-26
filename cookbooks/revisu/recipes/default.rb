@@ -42,3 +42,10 @@ template '/opt/nginx/conf/nginx.conf' do
   owner 'ubuntu'
   group 'ubuntu'
 end
+
+template '/etc/init.d/nginx' do
+  source 'nginx.init.d.erb'
+  mode 0755
+  owner 'root'
+  group 'root'
+end
