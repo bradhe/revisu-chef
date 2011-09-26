@@ -15,31 +15,18 @@ http {
     passenger_root /usr/lib/ruby/gems/1.8/gems/passenger-3.0.9;
     passenger_ruby /usr/bin/ruby1.8;
 
+    # Maximum allowable size of body.
+    client_max_body_size 500m;
+
     include       mime.types;
     default_type  application/octet-stream;
 
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
-    #access_log  logs/access.log  main;
-
     sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
     keepalive_timeout  65;
-
-    #gzip  on;
-
-    server {
-        server_name www.revisu.com;
-        rewrite ^/(.*) http://app.revisu.com/$1 permanent;
-    }
 
     server {
         listen 80;
-        server_name fs.revisu.com;
+        server_name <%= node[:nginx][:domain] %>;
         root /www/revisu/current/public/;
         passenger_enabled on;
 

@@ -1,3 +1,6 @@
 {
+  "nginx": {
+    "domain": "app.revisu.com"
+  }
   "run_list": ["recipe[git]", "recipe[openssl]", "recipe[mysql::server]", "recipe[revisu]"]
 }
