@@ -13,7 +13,7 @@ ln -s /usr/bin/gem1.8 /usr/bin/gem
 echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 
 # Install chef
-gem install chef mysql imagemagick libmagickcore-dev libmagickwand-dev
+gem install chef mysql libmagick9-dev
 
 # Move the cookboooks to the right place for check.
 rm -rf /var/chef-solo
