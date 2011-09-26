@@ -2,7 +2,7 @@
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 node.set_unless['mysql']['server_root_password'] = secure_password
 
-%w{/www/revisu/release /www/revisu/shared}.each do |d|
+%w{/www/revisu/releases /www/revisu/shared}.each do |d|
   directory d do
     mode 0755
     owner 'ubuntu'
